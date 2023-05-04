@@ -1,0 +1,23 @@
+# --- files
+#
+#.gitignore
+#
+*.conf
+*.log
+*.txt
+*.db
+*settings.py
+*config.py
+*test.py
+*.swp
+*.old
+*.original
+
+
+# --- dirs
+#
+/logs
+**/__pycache__
+
+/[Tt][Ee][Ss][Tt]
+
