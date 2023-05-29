@@ -15,6 +15,8 @@ WRITE = 1
 
 fname = os.path.basename(__file__).split('.')[0]
 
+ptrn_in_f = re.compile(r'^S8800_(0[1-9]|[12][0-9]|3[01])-(Mar\(03\)|Apr\(04\)|May\(05\))-2023_', re.I)
+
 ptrn_tr_ans = re.compile(r' ACC: transaction answered: ', re.I)
 
 ptrn_dt = re.compile(r'^2023-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-3])(:(0[0-9]|[1-5][0-9])){2}', re.I)
@@ -56,6 +58,12 @@ with open('./%s_result.txt'%fname, 'w') as f_out:
                 f_in_gz.close()
 
             if file.startswith(("<filename>")) and file.endswith((".log")):
+                count += 1
+                print(file)
+                with open(file, 'r') as f_in_log:
+                    find_pattern(f_in_log, f_out)
+
+            if not ptrn_in_f.search(file) is None and file.endswith((".log")):
                 count += 1
                 print(file)
                 with open(file, 'r') as f_in_log:
