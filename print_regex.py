@@ -51,6 +51,9 @@ def find_pattern_1(f_in, f_out):
 
 
 def find_pattern_2(f_in, f_out):
+    """
+    """
+    L_res = []
     for line in f_in:
         uid = line[:20]
         date = line[21:27]
@@ -69,13 +72,15 @@ def find_pattern_2(f_in, f_out):
 
         res_date = ptrn_date.search(date)
         if res_date is None:
-            return
+            break
         res_stime = ptrn_stime.search(stime)
         if res_stime is None:
-            return
+            break
         res_tac = ptrn_tac.search(tac)
         if res_tac is None:
-            return
+            break
+
+        L_res.append(uid)
 
 #        res_to = ptrn_to.search(line)
 #        res_tr_ans = ptrn_tr_ans.search(line)
@@ -87,6 +92,10 @@ def find_pattern_2(f_in, f_out):
 #            if res_from is None:
 #                print("res_from", line)
 #            res_str = "%s, %s, %s\n"%(res_dt.group(0), res_from.group(0), res_to.group(0))
+
+    for line in f_in:
+        uid = line[:20]
+        if uid in L_res:
 
             res_str = line
 
