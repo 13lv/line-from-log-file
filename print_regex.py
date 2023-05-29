@@ -52,7 +52,7 @@ def find_pattern_1(f_in, f_out):
 
 def find_pattern_2(f_in, f_out):
     for line in f_in:
-        id = line[:20]
+        uid = line[:20]
         date = line[21:27]
         stime = line[28:34]
         etime = line[35:41]
