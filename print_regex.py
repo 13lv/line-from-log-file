@@ -25,10 +25,11 @@ ptrn_to = re.compile(r'T=\+?(<999>|<999>|<999>|<999>)[0-9]{3,28}', re.I)
 ptrn_in_f = re.compile(r'^S8800_(0[1-9]|[12][0-9]|3[01])-May\(05\)-2023_', re.I)
 ptrn_d_dflt = re.compile(r'(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])[0-9]{2}') # Default
 ptrn_t_dflt = re.compile(r'(0[1-9]|1[0-9]|2[0-3])(0[0-9]|[1-5][0-9]){2}') # Default
-ptrn_date = re.compile(r'0[1-9]0523')
+ptrn_date = re.compile(r'(0[1-9]|[12][0-9]|3[01])0[456]23')
 ptrn_stime = ptrn_t_dflt
 ptrn_etime = re.compile(r'')
 ptrn_tac = re.compile(r'839')
+ptrn_vdn = re.compile(r'(7538|7519)')
 
 
 def find_pattern_1(f_in, f_out):
@@ -76,8 +77,11 @@ def find_pattern_2(f_in, f_out):
         res_stime = ptrn_stime.search(stime)
         if res_stime is None:
             break
-        res_tac = ptrn_tac.search(tac)
-        if res_tac is None:
+#        res_tac = ptrn_tac.search(tac)
+#        if res_tac is None:
+#            break
+        res_vdn = ptrn_tac.search(vdn)
+        if res_vdn is None:
             break
 
         L_res.append(uid)
