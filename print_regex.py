@@ -55,34 +55,34 @@ def find_pattern_2(f_in, f_out):
     """
     """
     L_res = []
-    for line in f_in:
-        uid = line[:20]
-        date = line[21:27]
-        stime = line[28:34]
-        etime = line[35:41]
-        tac = line[42:45]
-        cnum = line[46:61]
-        vdn = line[62:66]
-        dnum = line[67:85]
-        ucode = line[86:89]
-        duration = line[90:95]
-        frl = line[96:97]
-        acode=  line[98:103]
+    for line_1 in f_in:
+        uid = line_1[:20]
+        date = line_1[21:27]
+        stime = line_1[28:34]
+        etime = line_1[35:41]
+        tac = line_1[42:45]
+        cnum = line_1[46:61]
+        vdn = line_1[62:66]
+        dnum = line_1[67:85]
+        ucode = line_1[86:89]
+        duration = line_1[90:95]
+        frl = line_1[96:97]
+        acode=  line_1[98:103]
 
 #        print(id, date, stime, etime, tac, cnum, vdn, dnum, ucode, duration, frl, acode)
 
         res_date = ptrn_date.search(date)
         if res_date is None:
-            break
+            continue
         res_stime = ptrn_stime.search(stime)
         if res_stime is None:
-            break
+            continue
 #        res_tac = ptrn_tac.search(tac)
 #        if res_tac is None:
-#            break
+#            continue
         res_vdn = ptrn_tac.search(vdn)
         if res_vdn is None:
-            break
+            continue
 
         L_res.append(uid)
 
@@ -97,11 +97,15 @@ def find_pattern_2(f_in, f_out):
 #                print("res_from", line)
 #            res_str = "%s, %s, %s\n"%(res_dt.group(0), res_from.group(0), res_to.group(0))
 
-    for line in f_in:
-        uid = line[:20]
+#    print(L_res)
+
+    f_in.seek(0)
+
+    for line_2 in f_in:
+        uid = line_2[:20]
         if uid in L_res:
 
-            res_str = line
+            res_str = line_2
 
             if WRITE:
                 f_out.write(res_str)
