@@ -12,6 +12,7 @@ import gzip
 
 
 WRITE = 1
+DEBUG = 0
 
 fname = os.path.basename(__file__).split('.')[0]
 
@@ -39,10 +40,14 @@ def find_pattern_1(f_in, f_out):
         if not res_tr_ans is None and not res_to is None:
             res_dt = ptrn_dt.search(line)
             if res_dt is None:
-                print("res_dt", line)
+                if DEBUG:
+                    print("res_dt", line)
+                continue
             res_from = ptrn_from.search(line)
             if res_from is None:
-                print("res_from", line)
+                if DEBUG:
+                    print("res_from", line)
+                continue
             res_str = "%s, %s, %s\n"%(res_dt.group(0), res_from.group(0), res_to.group(0))
 
             if WRITE:
